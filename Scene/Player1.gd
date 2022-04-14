@@ -7,6 +7,7 @@ var input_vector = Vector2.ZERO
 var x = 0.0
 var y = 0.0	
 var animation = "Idle"
+var plShoot := preload("res://Scene/Shoot.tscn")
 # Called when the node enters the scene tree for the first time.
 
 var animationPlayer = null
@@ -19,6 +20,15 @@ func _physics_process(delta):
 	
 	
 	PlayerControl(delta)
+	
+	if Input.is_action_just_pressed("ui_space"):
+		#Shoot
+		#rint("Create Bullet")
+		var shoot := plShoot.instance()
+		shoot.position = position
+		shoot.InitDirection(velocity)
+				
+		get_tree().current_scene.add_child(shoot)
 		
 	
 		
